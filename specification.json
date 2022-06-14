@@ -1,0 +1,22 @@
+[{
+    "id": "ExtractFundsAnbima",
+    "match_when": {
+        "host": "data.anbima.com.br",
+        "method": "GET",
+        "path": "/fundos-bff/fundos",
+        "headers": {
+            "contains": ["page", "size"]
+        }
+    },
+    "parse_like": {
+        "payload_type": "json",
+        "behaviour": "aggregate",
+        "filter": ".content"
+    },
+    "process_with": {
+        "path": "/commit",
+        "behaviour": "dump",
+        "format": "json",
+        "outfile": "/out/output.json"
+    }
+}]

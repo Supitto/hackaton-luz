@@ -1,0 +1,48 @@
+# Shadow Inspector
+
+Este projeto permite uma forma alternativa de scappring atravez de interceptação de requisições
+
+# Como usar
+
+Para usar este projeto você precisa de:
+
+- Python3 instalado
+- Docker instalado e configurado
+- Um certificado auto assinado valido e configurado no seu navegador de escolha
+
+Passo a passo para executar o programa:
+
+- Popule o specification.json com a especificação desejada
+- Coloque o seu certificado .pem com o nome de cert.pem na pasta cert
+- Rode o programa  generate_addon.py
+
+# Specification DSL
+
+Por hora apenas os seguinte sechema para filtros é valido
+
+```
+{
+    "id": string,
+    "match_when": {
+        "host": string,
+        "method": string,
+        "path": string,
+        "headers": {
+            "contains": list(string)
+        }
+    },
+    "parse_like": {
+        "payload_type": string,
+        "behaviour": string,
+        "filter": string" #jq filter style
+    },
+    "process_with": {
+        "path": string,
+        "behaviour": string,
+        "format": string,
+        "outfile": string
+    }
+}
+```
+
+O specification.json pode conter diversos filtros na forma de lista, desde que os ids sejam unicos
